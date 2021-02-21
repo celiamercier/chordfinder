@@ -7,6 +7,7 @@ import com.tyalis.chordfinder.domain.RelativeNote;
 import com.tyalis.chordfinder.service.ChordsService;
 import com.tyalis.chordfinder.service.model.ChordResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +22,8 @@ public class ChordsController {
     @Autowired
     private ChordsService chordsService;
 
-    @RequestMapping("/chords")
-    FindChordResponse getChords(@RequestBody FindChordRequest request) {
+    @PostMapping("/chords")
+    FindChordResponse findChords(@RequestBody FindChordRequest request) {
         List<ChordResult> results = chordsService.findChords(map(request));
         if (results.isEmpty()) {
             return new FindChordResponse(Collections.emptyList(), Collections.emptyList());
